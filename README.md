@@ -140,3 +140,9 @@ Use Puppeth on your host to create a new genesis file
     3. Track new remote server
     4. Deploy network components
 
+Add support of quorum in the genesis file befor "clique section"
+
+    "isQuorum":true,
+
+Be sure to have 8545 TCP and 30303 TCP/UDP inbound rules allowed on AWS
+
