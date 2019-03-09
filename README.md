@@ -49,7 +49,7 @@ Verify that you can reach all your servers ([ansible](https://docs.ansible.com/a
 
 ansible -i ansible/hosts quorum-nodes -u ubuntu -m ping
 
-ABORTED- Then build quorum on each machine (preferred one build on a 64bits linux machine then scp to all remotes validator nodes)
+ABORTED - Then build quorum on each machine (preferred one build on a 64bits linux machine then scp to all remotes validator nodes)
 
     ansible -i ansible/hosts quorum-nodes -u ubuntu -a "git clone https://github.com/jpmorganchase/quorum.git"
     ansible -i ansible/hosts quorum-nodes -u ubuntu -a "wget https://dl.google.com/go/go1.12.linux-amd64.tar.gz"
@@ -58,12 +58,31 @@ ABORTED- Then build quorum on each machine (preferred one build on a 64bits linu
 
 Then build quorum on your host
 
-aws-quorum-node-1 c2379a1d4ff094eef9d7074afabbe4bdb29a565f
-aws-quorum-node-2 8202d027c62c578ed3d8bd98f1f9a0a106f3f592
-aws-quorum-node-3 64e0cebf10639346f43c6fbe5d5e728cdbede67c
-aws-quorum-node-4 d6a47a9516cb53a54d3766858e7258c816a821b0
+    git clone https://github.com/jpmorganchase/quorum.git
+    cd quorum
+    make all
 
-Use Puppeth to create a new genesis file
+Copy the bin folder to the remote servers
+
+    scp -r build/bin aws-quorum-node-1:~/
+    scp -r build/bin aws-quorum-node-2:~/
+    scp -r build/bin aws-quorum-node-3:~/
+    scp -r build/bin aws-quorum-node-4:~/
+
+
+Generate one account per validator on each server
+
+    geth account new
+
+
+Result:
+
+    aws-quorum-node-1 c2379a1d4ff094eef9d7074afabbe4bdb29a565f
+    aws-quorum-node-2 8202d027c62c578ed3d8bd98f1f9a0a106f3f592
+    aws-quorum-node-3 64e0cebf10639346f43c6fbe5d5e728cdbede67c
+    aws-quorum-node-4 d6a47a9516cb53a54d3766858e7258c816a821b0
+
+Use Puppeth on your host to create a new genesis file
 
 
     Please specify a network name to administer (no spaces, hyphens or capital letters please)
@@ -120,5 +139,4 @@ Use Puppeth to create a new genesis file
     2. Manage existing genesis
     3. Track new remote server
     4. Deploy network components
-
 
