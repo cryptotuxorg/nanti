@@ -1,13 +1,16 @@
 ## Setup on AWS
 
 
-* Create four t2.micro instances on AWS with 8GB SSD
-* Create a new SSH keyPair and put it under ~/.ssh/ethparis.pem
+Create four t2.micro instances on AWS with 8GB SSD
 
-* Give good permissions to ssh key
+
+Create a new SSH keyPair and put it under ~/.ssh/ethparis.pem
+
+Give good permissions to ssh key
 
 
     chmod 400 ~/.ssh/ethparis.pem
+
 
 Edit ~/.ssh/config and add configuration for your 4 machines
 
@@ -32,4 +35,5 @@ Edit ~/.ssh/config and add configuration for your 4 machines
         Port 22
         User ubuntu
         IdentityFile ~/.ssh/ethparis.pem
+
 
