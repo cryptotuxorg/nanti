@@ -1,0 +1,4 @@
+FROM quorumengineering/tessera:0.8
+COPY tessera-start.sh /opt/tessera-generate.sh
+
+ENTRYPOINT [ "/bin/sh", "/opt/tessera-generate.sh" ]

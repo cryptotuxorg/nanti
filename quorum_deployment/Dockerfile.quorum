@@ -1,0 +1,3 @@
+FROM quorumengineering/quorum:2.2.1
+COPY quorum-start.sh /quorum-start.sh
+ENTRYPOINT /quorum-start.sh

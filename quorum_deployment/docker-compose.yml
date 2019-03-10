@@ -1,0 +1,27 @@
+version: "3"
+services:
+  tessera:
+    build:
+      context: .
+      dockerfile: Dockerfile.tessera
+    ports:
+      - 9000:9000 # private tx
+      - 9080:9080 # non mandatory, instead of public key, send directly payload to tx manager
+    volumes:
+      - /home/ubuntu/tessera_data:/root/tdata
+      - /home/ubuntu/quorum_data:/root/qdata # tessera will write ipc inside quorum folder because quorum has to have access to communicate to tessera
+    environment:
+      - OTHER_NODES=http://18.191.160.159:9000/,http://52.14.85.155:9000/,http://18.191.142.136:9000/,http://3.16.41.72:9000/
+      - HOSTNAME=localhost
+  quorum:
+    build:
+      context: .
+      dockerfile: Dockerfile.quorum
+    ports:
+      - 8545:8545
+      - 8546:8546
+      - 30303:30303
+    volumes:
+      - /home/ubuntu/quorum_data:/root/qdata
+
+
