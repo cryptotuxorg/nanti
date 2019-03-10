@@ -12,9 +12,12 @@ Useful deployment files are under [quorum_deployment folder](quorum_deployment)
 
 The challenge was to adapt quorum network setup examples currently available to cloud provider deployment, which was not so easy to do.
 
-
-
 ![Image of VMs](https://github.com/cryptotuxorg/nanti/blob/master/machines.png)
+
+
+The challenge, which currently WIP, is to deploy POA network bridge between ethereum mainnet and a private quorum sidechain
+Instead of using POA Sokol network, we'll use our custom private quorum network
+It will allow people to lock some DAI into mainnet, to issue x$ equivalent in the quorum private chain, which will give the possibility to buy bonds directly
 
 
 ## Setup on AWS

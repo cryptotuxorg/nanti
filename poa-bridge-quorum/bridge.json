@@ -1,0 +1,13 @@
+{
+    "homeBridge": {
+        "address": "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
+        "deployedBlockNumber": 789987,
+        "erc677": {
+            "address": "0x269f57f5ae5421d084686f9e353f5b7ee6af54c2"
+        }
+    },
+    "quorumBridge": {
+        "address": "0x7ae703ea88b0545eef1f0bf8f91d5276e39be2f7",
+        "deployedBlockNumber": 567765
+    }
+}
