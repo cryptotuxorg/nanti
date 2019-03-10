@@ -1,3 +1,9 @@
+# Abstract
+
+The idea is to deploy a quorum network between 4 validators nodes
+4 AWS machines has been instancied and the quorum network is up and running
+Useful deployment files are under [quorum_deployment folder](quorum_deployment)
+
 ## Setup on AWS
 
 
@@ -158,72 +164,65 @@ Then init geth with the genesis on each node
     geth init nanti.json
 
 
-=============================================================
+## QUORUM SETUP
 
-scp quorum folder into remote server
-cd quorum
+    scp quorum folder into remote server
+    cd quorum
+    mkdir ~/quorum_data
+    ansible -i ansible/hosts quorum-nodes -u ubuntu -b -m command -a 'mv /home/ubuntu/.ethereum/keystore /home/ubuntu/quorum_data/'
+    echo "MYPASS" >> pass.txt
+    sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -genkey /root/qdata/nodekey
 
-mkdir ~/quorum_data
- ansible -i ansible/hosts quorum-nodes -u ubuntu -b -m command -a 'mv /home/ubuntu/.ethereum/keystore /home/ubuntu/quorum_data/'
+Display on host
 
- echo "MYPASS" >> pass.txt
+    sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex 8ddb455b5d72454171a1591ef914d4ab81f1ed706d7eb4dde639f21a717cfe72 -writeaddress
 
-sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -genkey /root/qdata/nodekey
-
-display on host
-8ddb455b5d72454171a1591ef914d4ab81f1ed706d7eb4dde639f21a717cfe72
-
-sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex 8ddb455b5d72454171a1591ef914d4ab81f1ed706d7eb4dde639f21a717cfe72 -writeaddress
-
-f7a4a853b0f6469dee9c1cdcd33854f0854b43190ad2ee5e513c441b068a98afb8c4715f8d58e341d03d6f1c865a2fecd5aa90bdaa24c335a6c9ecd8048270dd
+    f7a4a853b0f6469dee9c1cdcd33854f0854b43190ad2ee5e513c441b068a98afb8c4715f8d58e341d03d6f1c865a2fecd5aa90bdaa24c335a6c9ecd8048270dd
 
 
-sudo cat ../quorum_data/nodekey
-2a3f4db45e40d3d5458684a036a79c52f4c42f9b65016f85d657303b2701d997
+    sudo cat ../quorum_data/nodekey
+    2a3f4db45e40d3d5458684a036a79c52f4c42f9b65016f85d657303b2701d997
 
-sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex 2a3f4db45e40d3d5458684a036a79c52f4c42f9b65016f85d657303b2701d997 -writeaddress
+    sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex 2a3f4db45e40d3d5458684a036a79c52f4c42f9b65016f85d657303b2701d997 -writeaddress
 
-fc529f773f3f41a8daba7af677466a031d31130d9d55085a6c9e4adf57fe09e8af4f7d1299e3168e73744a6367df81a2a84cd5553f847b5e03baa021ffad3bd2
+    fc529f773f3f41a8daba7af677466a031d31130d9d55085a6c9e4adf57fe09e8af4f7d1299e3168e73744a6367df81a2a84cd5553f847b5e03baa021ffad3bd2
 
-sudo cat ../quorum_data/nodekey
-b4159f4a8a645818393ef55426671cdf8df2fb156979e9d53f78ab700744caa3
+    sudo cat ../quorum_data/nodekey
+    b4159f4a8a645818393ef55426671cdf8df2fb156979e9d53f78ab700744caa3
 
-sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex b4159f4a8a645818393ef55426671cdf8df2fb156979e9d53f78ab700744caa3 -writeaddress
+    sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex b4159f4a8a645818393ef55426671cdf8df2fb156979e9d53f78ab700744caa3 -writeaddress
 
-1d85bc2ebeb1820138039fde266264fb4ea68bc93f0216a89b0ddbc2b015f8c8bb17b53bb4c58a11e490610e982a9c9840b17410cc9a4349aa4af5c5de1f6e6f
+    1d85bc2ebeb1820138039fde266264fb4ea68bc93f0216a89b0ddbc2b015f8c8bb17b53bb4c58a11e490610e982a9c9840b17410cc9a4349aa4af5c5de1f6e6f
 
-sudo cat ../quorum_data/nodekey
-b90fc697ab597a1a68e4fd5e97e84841bd174296b6aa71df6a6aec44a27f98d3
+    sudo cat ../quorum_data/nodekey
+    b90fc697ab597a1a68e4fd5e97e84841bd174296b6aa71df6a6aec44a27f98d3
 
-sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex b90fc697ab597a1a68e4fd5e97e84841bd174296b6aa71df6a6aec44a27f98d3 -writeaddress
+    sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekeyhex b90fc697ab597a1a68e4fd5e97e84841bd174296b6aa71df6a6aec44a27f98d3 -writeaddress
 
-57e987a7d1a1e16d4f3198994fc39fa3d959e1ee0cc81e7c6dbf651cc9683516a33c663dc28b2a6afb3e6ab7395d38436611b0ae761eac15a611773394cd098b
+    57e987a7d1a1e16d4f3198994fc39fa3d959e1ee0cc81e7c6dbf651cc9683516a33c663dc28b2a6afb3e6ab7395d38436611b0ae761eac15a611773394cd098b
 
 
-sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekey /root/qdata/nodekey -writeaddress
+    sudo docker-compose run --rm --entrypoint /usr/local/bin/bootnode quorum -nodekey /root/qdata/nodekey -writeaddress
 
 
 
 On each VM
-sed -e s#localhost#http://18.191.160.159#g -i docker-compose.yml
+
+    sed -e s#localhost#http://18.191.160.159#g -i docker-compose.yml
+    sed -e s#localhost#http://52.14.85.155#g -i docker-compose.yml
+    sed -e s#localhost#http://18.191.142.136#g -i docker-compose.yml
+    sed -e s#localhost#http://3.16.41.72#g -i docker-compose.yml
 
 
-sed -e s#localhost#http://52.14.85.155#g -i docker-compose.yml
+    for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/Dockerfile.quorum ${i}:~/quorum/Dockerfile.quorum; done
 
-sed -e s#localhost#http://18.191.142.136#g -i docker-compose.yml
+    for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/Dockerfile.tessera ${i}:~/quorum/Dockerfile.tessera; done
 
-sed -e s#localhost#http://3.16.41.72#g -i docker-compose.yml
+    ansible -i ansible/hosts quorum-nodes -u ubuntu -b -m command -a 'sudo chmod +x /home/ubuntu/quorum/quorum-start.sh'
 
-
-for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/Dockerfile.quorum ${i}:~/quorum/Dockerfile.quorum; done
-
-for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/Dockerfile.tessera ${i}:~/quorum/Dockerfile.tessera; done
-
-ansible -i ansible/hosts quorum-nodes -u ubuntu -b -m command -a 'sudo chmod +x /home/ubuntu/quorum/quorum-start.sh'
-
-for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/nanti.json ${i}:~/quorum_data/nanti.json; done
+    for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/nanti.json ${i}:~/quorum_data/nanti.json; done
 
 
-for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/static-nodes.json ${i}:~/quorum_data/dd; done
+    for i in aws-quorum-node-1 aws-quorum-node-2 aws-quorum-node-3 aws-quorum-node-4; do scp -r quorum/static-nodes.json ${i}:~/quorum_data/dd; done
 
- sudo docker-compose up --build
+    sudo docker-compose up --build
