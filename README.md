@@ -6,6 +6,8 @@ The bond contract is deployed at 0x451875bdd0e524882550ec1ce52bcc4d0ff90eae and 
 
     geth attach http://3.16.41.72:8545
 
+2 repos: one dedicated to infrastructure part(this current one), and the other one dedicated to the Dapp part : [https://github.com/cryptotuxorg/nanti-dapp](https://github.com/cryptotuxorg/nanti-dapp)
+
 The idea is to deploy a quorum network between 4 validators nodes
 4 AWS machines has been instancied and the quorum network is up and running
 Useful deployment files are under [quorum_deployment folder](quorum_deployment)
